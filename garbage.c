@@ -1,20 +1,29 @@
 #include <stdio.h>
 
+int getline(char s[]);
+
 int main()
 {
-    int size = 2;
-    int i = 0;
-    char c;
-    char n[size];
-    while ((c = getchar()) != EOF)
+    char s[1000];
+    int lenght = getline(s);
+    printf("%d\n", lenght);
+    printf("%s", s);
+    for (int i = 0; i < lenght; i++)
     {
-        n[i] = c;
-        i++;
-        size++;
+        printf("%d; ", s[i]);
     }
     
-    for (int i = 0; i < (sizeof(n) / sizeof(n[0])); i++)
+}
+
+int getline(char s[])
+{
+    int c,i;
+    i = 0;
+
+    while ((c = getchar()) != EOF)
     {
-        printf("%d  ", n[i]);
+        s[i] = c;
+        i++;
     }
+    return i;
 }

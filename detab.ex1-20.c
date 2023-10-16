@@ -4,15 +4,17 @@
 of blanks to space to the next tab stop. Assume a fixed set of tab stops, say every n columns.
 Should n be a variable or a symbolic parameter? */
 
-#define TAB_LENGHT 4
+#define TAB_LENGHT 8
 
 void replace_tabs(char insteadC, char s[], int lenght);
+int getline(char s[]);
 
 int main()
 {
-    char s[] = "fdaslfjdsa\tfdasfa\t";
+    char s[1000];
+    int lenght = getline(s);
     int array_size = sizeof(s) / sizeof(s[0]);
-    replace_tabs('|', s, array_size);
+    replace_tabs('|', s, lenght);
 }
 
 void replace_tabs(char insteadC, char s[], int lenght)
@@ -32,25 +34,39 @@ void replace_tabs(char insteadC, char s[], int lenght)
 
     char new_s[new_array_size];
 
-    int i = 0;
-    int a = i;
-    while (i < new_array_size)
+    int new_i,old_i = 0;
+    int a = 0;
+    while (old_i < old_array_size)
     {
-        if (s[i] != '\t')
+        if (s[old_i] != '\t')
         {
-            new_s[i] = s[i];
-            i++;
+            new_s[new_i] = s[old_i];
+            new_i++;
+            old_i++;
         }
         else
         {
-            for (a = i; a < i + 4; a++)
+            for (a = new_i; a < new_i + TAB_LENGHT; a++)
             {
                 new_s[a] = insteadC;
-                
             }
-            i += 4;
+            new_i += TAB_LENGHT;
+            old_i++;
         }
     }
 
     printf("%s", new_s);
+}
+
+int getline(char s[])
+{
+    int c,i;
+    i = 0;
+
+    while ((c = getchar()) != EOF)
+    {
+        s[i] = c;
+        i++;
+    }
+    return i;
 }

@@ -1,8 +1,20 @@
 #include <stdio.h>
+#include <limits.h>
 
 int getline(char s[]);
+void println(void);
 
-int main(){   }
+int main()
+{
+    
+
+    
+}
+
+void println(void)
+{
+    printf("\n");
+}
 
 int getline(char s[])
 {
